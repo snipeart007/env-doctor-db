@@ -151,14 +151,3 @@ stacks:
         version: 1.16.1
       - name: numpy
         version: 1.26.4
-  - name: minimal-torch
-    cuda_version: '12.1'
-    env_system: linux
-    python_version: '3.12'
-    confidence_level: stable
-    description: Minimal LLM inference stack
-    packages:
-      - name: torch
-        version: 2.3.1
-      - name: transformers
-        version: 4.40.0
