@@ -1,0 +1,12 @@
+rules:
+- package: transformers
+  version_range: '4.49'
+  dependency: torch
+  dependency_range: '2.12'
+  cuda_version: '1.38'
+  env_system: win32
+  type: runtime-risk
+  confidence: community-tested
+  severity: 40
+  description: Test Case
+  workaround: No suggestions
