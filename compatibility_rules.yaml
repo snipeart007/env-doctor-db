@@ -1,0 +1,325 @@
+rules:
+  # --- PyTorch Ecosystem ---
+  - package: "torch"
+    version_range: ">=2.12.0"
+    dependency: "cuda"
+    dependency_range: "<12.4"
+    cuda_version: "<12.4"
+    type: "incompatible"
+    confidence: "production-tested"
+    severity: 100
+    description: "Torch 2.12+ requires CUDA 12.4+ for new FP8 kernels."
+    workaround: "Upgrade CUDA to 12.4+ or downgrade torch to 2.11.0."
+
+  - package: "torchvision"
+    version_range: ">=0.22.0"
+    dependency: "torch"
+    dependency_range: "<2.10.0"
+    type: "incompatible"
+    confidence: "stable"
+    severity: 90
+    description: "TorchVision 0.22+ uses Torch 2.10 internal tensor APIs."
+
+  - package: "torchaudio"
+    version_range: ">=2.12.0"
+    dependency: "torch"
+    dependency_range: "!=2.12.0"
+    type: "incompatible"
+    confidence: "production-tested"
+    severity: 100
+    description: "Audio 2.12 is strictly tied to Torch 2.12 ABI."
+
+  # --- TensorFlow Ecosystem ---
+  - package: "tensorflow"
+    version_range: ">=2.21.0"
+    dependency: "python"
+    dependency_range: "<3.10"
+    type: "incompatible"
+    confidence: "stable"
+    severity: 100
+    description: "TF 2.21+ has dropped support for Python <3.10."
+
+  - package: "tensorflow-gpu"
+    version_range: ">=2.21.0"
+    dependency: "cuda"
+    dependency_range: "<12.0"
+    cuda_version: "<12.0"
+    type: "incompatible"
+    confidence: "production-tested"
+    severity: 100
+    description: "TensorFlow 2.21+ GPU builds require CUDA 12.0+."
+
+  - package: "keras"
+    version_range: ">=3.5.0"
+    dependency: "tensorflow"
+    dependency_range: "<2.18.0"
+    type: "runtime-risk"
+    confidence: "community-tested"
+    severity: 60
+    description: "Keras 3.5+ has performance regressions on older TF backends."
+
+  # --- JAX Ecosystem ---
+  - package: "jax"
+    version_range: ">=0.10.0"
+    dependency: "jaxlib"
+    dependency_range: "<0.10.0"
+    type: "incompatible"
+    confidence: "production-tested"
+    severity: 100
+    description: "JAX 0.10+ requires matching jaxlib 0.10+."
+
+  - package: "jaxlib"
+    version_range: ">=0.10.0"
+    dependency: "cuda"
+    dependency_range: "<12.1"
+    cuda_version: "<12.1"
+    env_system: "linux"
+    type: "incompatible"
+    confidence: "stable"
+    severity: 95
+    description: "Jaxlib 0.10+ CUDA wheels for Linux require CUDA 12.1+."
+
+  # --- Ray Ecosystem ---
+  - package: "ray"
+    version_range: ">=2.55.0"
+    dependency: "pydantic"
+    dependency_range: "<2.0.0"
+    type: "incompatible"
+    confidence: "stable"
+    severity: 85
+    description: "Ray 2.55+ has fully migrated to Pydantic v2."
+    workaround: "Upgrade pydantic to 2.0.0+ or downgrade ray to 2.54.x."
+
+  - package: "ray[serve]"
+    version_range: ">=2.55.0"
+    dependency: "fastapi"
+    dependency_range: "<0.110.0"
+    type: "partial"
+    confidence: "community-tested"
+    severity: 40
+    description: "Ray Serve 2.55+ works best with FastAPI 0.110+ for async streaming."
+
+  # --- HuggingFace Ecosystem ---
+  - package: "transformers"
+    version_range: ">=5.8.0"
+    dependency: "torch"
+    dependency_range: "<2.11.0"
+    type: "incompatible"
+    confidence: "production-tested"
+    severity: 100
+    description: "Transformers v5+ requires Torch 2.11+ for its optimized backend."
+
+  - package: "trl"
+    version_range: ">=0.12.0"
+    dependency: "transformers"
+    dependency_range: "<5.0.0"
+    type: "incompatible"
+    confidence: "stable"
+    severity: 90
+    description: "TRL 0.12+ utilizes Transformers v5 specific Trainer hooks."
+
+  - package: "peft"
+    version_range: ">=0.15.0"
+    dependency: "accelerate"
+    dependency_range: "<1.0.0"
+    type: "runtime-risk"
+    confidence: "community-tested"
+    severity: 70
+    description: "PEFT 0.15+ has issues with multi-GPU loading on Accelerate <1.0."
+
+  - package: "diffusers"
+    version_range: ">=0.38.0"
+    dependency: "torch"
+    dependency_range: "<2.12.0"
+    env_system: "win32"
+    type: "partial"
+    confidence: "community-tested"
+    severity: 50
+    description: "Diffusers 0.38+ on Windows requires Torch 2.12 for stable xformers integration."
+
+  # --- Inference Runtimes ---
+  - package: "vllm"
+    version_range: ">=0.21.0"
+    dependency: "cuda"
+    dependency_range: "<12.1"
+    cuda_version: "<12.1"
+    type: "incompatible"
+    confidence: "production-tested"
+    severity: 100
+    description: "vLLM 0.21+ requires CUDA 12.1+ for PagedAttention v3."
+
+  - package: "vllm"
+    version_range: ">=0.21.0"
+    dependency: "ray"
+    dependency_range: "<2.50.0"
+    type: "runtime-risk"
+    confidence: "stable"
+    severity: 80
+    description: "vLLM 0.21+ distributed inference requires Ray 2.50+ for collective ops."
+
+  # --- Optimization & Utils ---
+  - package: "deepspeed"
+    version_range: ">=0.19.0"
+    dependency: "torch"
+    dependency_range: "<2.11.0"
+    type: "incompatible"
+    confidence: "production-tested"
+    severity: 100
+    description: "DeepSpeed 0.19+ requires Torch 2.11+ for ZeRO-3++ optimizations."
+
+  - package: "bitsandbytes"
+    version_range: ">=0.45.0"
+    dependency: "cuda"
+    dependency_range: ">=12.6"
+    cuda_version: ">=12.6"
+    env_system: "win32"
+    type: "runtime-risk"
+    confidence: "experimental"
+    severity: 90
+    description: "BNB 0.45+ has known issues with CUDA 12.6+ drivers on Windows 11."
+
+  - package: "flash-attn"
+    version_range: ">=2.7.0"
+    dependency: "cuda"
+    dependency_range: "<12.2"
+    cuda_version: "<12.2"
+    type: "incompatible"
+    confidence: "stable"
+    severity: 100
+    description: "Flash Attention 2.7+ requires CUDA 12.2+ for Hopper optimizations."
+
+  # --- Orchestration ---
+  - package: "langchain"
+    version_range: ">=1.3.0"
+    dependency: "pydantic"
+    dependency_range: "<2.4.0"
+    type: "partial"
+    confidence: "community-tested"
+    severity: 30
+    description: "LangChain 1.3+ works but shows deprecation warnings with Pydantic <2.4."
+
+  - package: "llama-index"
+    version_range: ">=0.12.0"
+    dependency: "langchain"
+    dependency_range: ">=1.3.0"
+    type: "compatible"
+    confidence: "stable"
+    severity: 0
+    description: "LlamaIndex 0.12+ is fully compatible and optimized for LangChain 1.3+."
+
+  # --- Scikit / Data ---
+  - package: "scikit-learn"
+    version_range: ">=1.6.0"
+    dependency: "numpy"
+    dependency_range: "<2.0.0"
+    type: "incompatible"
+    confidence: "production-tested"
+    severity: 100
+    description: "Scikit-learn 1.6+ requires NumPy 2.0+ ABI."
+    workaround: "Upgrade numpy to 2.0.0+ or downgrade scikit-learn to 1.5.x."
+
+  - package: "pandas"
+    version_range: ">=2.5.0"
+    dependency: "numpy"
+    dependency_range: "<2.0.0"
+    type: "runtime-risk"
+    confidence: "stable"
+    severity: 50
+    description: "Pandas 2.5+ performs better with NumPy 2.0+ SIMD optimizations."
+
+  # --- Specific Archs ---
+  - package: "onnxruntime-gpu"
+    version_range: ">=1.20.0"
+    dependency: "cuda"
+    dependency_range: "!=12.1"
+    cuda_version: "!=12.1"
+    type: "incompatible"
+    confidence: "community-tested"
+    severity: 85
+    description: "ORT-GPU 1.20 specific build is strictly validated against CUDA 12.1."
+
+  - package: "cupy-cuda12x"
+    version_range: ">=14.0.0"
+    dependency: "cuda"
+    dependency_range: "<12.0"
+    cuda_version: "<12.0"
+    type: "incompatible"
+    confidence: "production-tested"
+    severity: 100
+    description: "CuPy 14 for CUDA 12.x cannot run on CUDA 11.x drivers."
+
+  # --- Deep CUDA / Driver / Architecture Rules ---
+  - package: "torch"
+    version_range: ">=2.4.0"
+    dependency: "cuda"
+    dependency_range: ">=12.5"
+    cuda_version: ">=12.5"
+    env_system: "win32"
+    type: "runtime-risk"
+    confidence: "community-tested"
+    severity: 75
+    description: "Torch 2.4+ on Windows has intermittent TDR (Timeout Detection and Recovery) issues with CUDA 12.5+ drivers."
+    workaround: "Downgrade CUDA driver to 12.4 or set TDR delay in registry."
+
+  - package: "flash-attn"
+    version_range: ">=2.6.0"
+    dependency: "cuda"
+    dependency_range: "<11.8"
+    cuda_version: "<11.8"
+    type: "incompatible"
+    confidence: "production-tested"
+    severity: 100
+    description: "Flash Attention 2.6+ requires CUDA 11.8+ for Ampere/Hopper PTX instructions."
+
+  - package: "vllm"
+    version_range: ">=0.20.0"
+    dependency: "cuda"
+    dependency_range: ">=12.6"
+    cuda_version: ">=12.6"
+    type: "runtime-risk"
+    confidence: "experimental"
+    severity: 85
+    description: "vLLM 0.20+ kernels may experience memory corruption on CUDA 12.6 Toolkits due to a known nvcc optimizer bug."
+    workaround: "Use CUDA 12.4 or 12.1 for production vLLM deployments."
+
+  - package: "nvidia-cudnn-cu12"
+    version_range: ">=9.0.0"
+    dependency: "cuda"
+    dependency_range: "<12.0"
+    cuda_version: "<12.0"
+    type: "incompatible"
+    confidence: "stable"
+    severity: 100
+    description: "cuDNN 9+ for CUDA 12 is binary incompatible with CUDA 11.x runtimes."
+
+  - package: "bitsandbytes"
+    version_range: ">=0.44.0"
+    dependency: "cuda"
+    dependency_range: "==11.7"
+    cuda_version: "==11.7"
+    type: "partial"
+    confidence: "community-tested"
+    severity: 40
+    description: "BNB 0.44+ works on CUDA 11.7 but 8-bit optimizers are significantly slower than on 11.8+."
+
+  - package: "jaxlib"
+    version_range: ">=0.9.0"
+    dependency: "cuda"
+    dependency_range: ">=12.4"
+    cuda_version: ">=12.4"
+    env_system: "linux"
+    type: "incompatible"
+    confidence: "production-tested"
+    severity: 100
+    description: "Jaxlib 0.9+ builds for CUDA 12.4+ require GLIBC 2.35+ (Ubuntu 22.04+)."
+    workaround: "Use Jaxlib 0.8.x on older Linux distributions like Ubuntu 20.04."
+
+  - package: "triton"
+    version_range: ">=3.0.0"
+    dependency: "cuda"
+    dependency_range: "<11.4"
+    cuda_version: "<11.4"
+    type: "incompatible"
+    confidence: "stable"
+    severity: 100
+    description: "Triton 3.0+ compiler requires CUDA 11.4+ for LLVM backend compatibility."
