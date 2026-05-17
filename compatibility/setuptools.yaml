@@ -1,0 +1,14 @@
+rules:
+- package: setuptools
+  version_range: <=68.2.0
+  dependency: distutils
+  dependency_range: any
+  cuda_version: null
+  env_system: windows
+  type: incompatible
+  confidence: community-tested
+  severity: 100
+  description: Python 3.12 removed 'distutils', causing legacy packages like older
+    setuptools to fail.
+  workaround: Upgrade setuptools to a version that no longer depends on distutils
+    or use a Python version <3.12.
