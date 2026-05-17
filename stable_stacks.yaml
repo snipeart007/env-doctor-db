@@ -1,162 +1,164 @@
 stacks:
-  - name: "Torch-2.12-Production-Stack"
-    cuda_version: "12.4"
-    env_system: "linux"
-    python_version: ">=3.11"
-    confidence: "production-tested"
-    description: "Cutting edge production stack for H100 clusters with Torch 2.12."
+  - name: Torch-2.12-Production-Stack
+    cuda_version: '12.4'
+    env_system: linux
+    python_version: '>=3.11'
+    confidence: production-tested
+    description: Cutting edge production stack for H100 clusters with Torch 2.12.
     packages:
-      - name: "torch"
-        version: "2.12.0"
-      - name: "transformers"
-        version: "5.8.1"
-      - name: "accelerate"
-        version: "1.5.0"
-      - name: "flash-attn"
-        version: "2.7.0"
-      - name: "vllm"
-        version: "0.21.0"
-
-  - name: "Stable-FineTuning-Llama4"
-    cuda_version: "12.1"
-    env_system: "linux"
-    python_version: ">=3.10"
-    confidence: "stable"
-    description: "Verified stack for fine-tuning large models using TRL and PEFT."
+      - name: torch
+        version: 2.12.0
+      - name: transformers
+        version: 5.8.1
+      - name: accelerate
+        version: 1.5.0
+      - name: flash-attn
+        version: 2.7.0
+      - name: vllm
+        version: 0.21.0
+  - name: Stable-FineTuning-Llama4
+    cuda_version: '12.1'
+    env_system: linux
+    python_version: '>=3.10'
+    confidence: stable
+    description: Verified stack for fine-tuning large models using TRL and PEFT.
     packages:
-      - name: "torch"
-        version: "2.11.0"
-      - name: "transformers"
-        version: "5.5.0"
-      - name: "trl"
-        version: "0.12.0"
-      - name: "peft"
-        version: "0.15.0"
-      - name: "bitsandbytes"
-        version: "0.44.1"
-
-  - name: "TF-Enterprise-ML"
-    cuda_version: "11.8"
-    env_system: "linux"
-    python_version: ">=3.10"
-    confidence: "production-tested"
-    description: "Standard enterprise stack for TensorFlow users on older CUDA."
+      - name: torch
+        version: 2.11.0
+      - name: transformers
+        version: 5.5.0
+      - name: trl
+        version: 0.12.0
+      - name: peft
+        version: 0.15.0
+      - name: bitsandbytes
+        version: 0.44.1
+  - name: TF-Enterprise-ML
+    cuda_version: '11.8'
+    env_system: linux
+    python_version: '>=3.10'
+    confidence: production-tested
+    description: Standard enterprise stack for TensorFlow users on older CUDA.
     packages:
-      - name: "tensorflow"
-        version: "2.20.0"
-      - name: "keras"
-        version: "3.4.0"
-      - name: "tensorboard"
-        version: "2.20.0"
-      - name: "scikit-learn"
-        version: "1.5.2"
-
-  - name: "JAX-Research-Stack"
-    cuda_version: "12.2"
-    env_system: "linux"
-    python_version: ">=3.11"
-    confidence: "stable"
-    description: "High-performance JAX stack for research and simulation."
+      - name: tensorflow
+        version: 2.20.0
+      - name: keras
+        version: 3.4.0
+      - name: tensorboard
+        version: 2.20.0
+      - name: scikit-learn
+        version: 1.5.2
+  - name: JAX-Research-Stack
+    cuda_version: '12.2'
+    env_system: linux
+    python_version: '>=3.11'
+    confidence: stable
+    description: High-performance JAX stack for research and simulation.
     packages:
-      - name: "jax"
-        version: "0.10.0"
-      - name: "jaxlib"
-        version: "0.10.0"
-      - name: "chex"
-        version: "0.1.86"
-      - name: "flax"
-        version: "0.8.2"
-
-  - name: "Windows-Desktop-ML"
-    cuda_version: "12.1"
-    env_system: "win32"
-    python_version: ">=3.10"
-    confidence: "community-tested"
-    description: "Optimized stack for local development on Windows 10/11."
+      - name: jax
+        version: 0.10.0
+      - name: jaxlib
+        version: 0.10.0
+      - name: chex
+        version: 0.1.86
+      - name: flax
+        version: 0.8.2
+  - name: Windows-Desktop-ML
+    cuda_version: '12.1'
+    env_system: win32
+    python_version: '>=3.10'
+    confidence: community-tested
+    description: Optimized stack for local development on Windows 10/11.
     packages:
-      - name: "torch"
-        version: "2.10.0"
-      - name: "torchvision"
-        version: "0.21.0"
-      - name: "diffusers"
-        version: "0.30.0"
-      - name: "xformers"
-        version: "0.0.28"
-
-  - name: "Ray-Distributed-Serve"
-    cuda_version: "12.1"
-    env_system: "linux"
-    python_version: ">=3.10"
-    confidence: "stable"
-    description: "Stack for scalable model serving using Ray and FastAPI."
+      - name: torch
+        version: 2.10.0
+      - name: torchvision
+        version: 0.21.0
+      - name: diffusers
+        version: 0.30.0
+      - name: xformers
+        version: 0.0.28
+  - name: Ray-Distributed-Serve
+    cuda_version: '12.1'
+    env_system: linux
+    python_version: '>=3.10'
+    confidence: stable
+    description: Stack for scalable model serving using Ray and FastAPI.
     packages:
-      - name: "ray"
-        version: "2.55.1"
-      - name: "fastapi"
-        version: "0.111.0"
-      - name: "pydantic"
-        version: "2.7.1"
-      - name: "uvicorn"
-        version: "0.29.0"
-
-  - name: "LLM-App-Dev-Stack"
+      - name: ray
+        version: 2.55.1
+      - name: fastapi
+        version: 0.111.0
+      - name: pydantic
+        version: 2.7.1
+      - name: uvicorn
+        version: 0.29.0
+  - name: LLM-App-Dev-Stack
     cuda_version: None
     env_system: None
-    python_version: ">=3.10"
-    confidence: "stable"
-    description: "Platform-agnostic stack for RAG and LLM application development."
+    python_version: '>=3.10'
+    confidence: stable
+    description: Platform-agnostic stack for RAG and LLM application development.
     packages:
-      - name: "langchain"
-        version: "1.3.0"
-      - name: "llama-index"
-        version: "0.12.0"
-      - name: "openai"
-        version: "1.30.1"
-      - name: "chromadb"
-        version: "0.5.0"
-
-  - name: "Classic-Data-Science"
+      - name: langchain
+        version: 1.3.0
+      - name: llama-index
+        version: 0.12.0
+      - name: openai
+        version: 1.30.1
+      - name: chromadb
+        version: 0.5.0
+  - name: Classic-Data-Science
     cuda_version: None
     env_system: None
-    python_version: ">=3.9"
-    confidence: "production-tested"
-    description: "The gold standard stack for classical machine learning and data analysis."
+    python_version: '>=3.9'
+    confidence: production-tested
+    description: The gold standard stack for classical machine learning and data analysis.
     packages:
-      - name: "numpy"
-        version: "1.26.4"
-      - name: "pandas"
-        version: "2.2.2"
-      - name: "scikit-learn"
-        version: "1.5.0"
-      - name: "matplotlib"
-        version: "3.9.0"
-
-  - name: "HuggingFace-Legacy-Compatibility"
-    cuda_version: "11.7"
-    env_system: "linux"
-    python_version: ">=3.8"
-    confidence: "stable"
-    description: "Legacy stack for projects stuck on CUDA 11.7."
+      - name: numpy
+        version: 1.26.4
+      - name: pandas
+        version: 2.2.2
+      - name: scikit-learn
+        version: 1.5.0
+      - name: matplotlib
+        version: 3.9.0
+  - name: HuggingFace-Legacy-Compatibility
+    cuda_version: '11.7'
+    env_system: linux
+    python_version: '>=3.8'
+    confidence: stable
+    description: Legacy stack for projects stuck on CUDA 11.7.
     packages:
-      - name: "torch"
-        version: "2.0.1"
-      - name: "transformers"
-        version: "4.36.2"
-      - name: "datasets"
-        version: "2.16.1"
-      - name: "accelerate"
-        version: "0.26.0"
-
-  - name: "ONNX-Inference-Edge"
-    cuda_version: "12.1"
-    env_system: "linux"
-    python_version: ">=3.10"
-    confidence: "community-tested"
-    description: "Optimized for high-speed ONNX inference on NVIDIA edge devices."
+      - name: torch
+        version: 2.0.1
+      - name: transformers
+        version: 4.36.2
+      - name: datasets
+        version: 2.16.1
+      - name: accelerate
+        version: 0.26.0
+  - name: ONNX-Inference-Edge
+    cuda_version: '12.1'
+    env_system: linux
+    python_version: '>=3.10'
+    confidence: community-tested
+    description: Optimized for high-speed ONNX inference on NVIDIA edge devices.
     packages:
-      - name: "onnxruntime-gpu"
-        version: "1.20.0"
-      - name: "onnx"
-        version: "1.16.1"
-      - name: "numpy"
-        version: "1.26.4"
+      - name: onnxruntime-gpu
+        version: 1.20.0
+      - name: onnx
+        version: 1.16.1
+      - name: numpy
+        version: 1.26.4
+  - name: minimal-torch
+    cuda_version: '12.1'
+    env_system: linux
+    python_version: '3.12'
+    confidence_level: stable
+    description: Minimal LLM inference stack
+    packages:
+      - name: torch
+        version: 2.3.1
+      - name: transformers
+        version: 4.40.0
